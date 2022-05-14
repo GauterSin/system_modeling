@@ -137,7 +137,7 @@ def marquardt_method(
     while np.abs(step) > EPS: 
         if f1 <= f2:
             b = x2
-            x2 = x1
+            x2 = x1 - func_derivative_1(x1)/(func_derivative_2(x1) + tau/2)
             f2 = f1
             x1 = a + b - x1
             f1 = func(x1)
@@ -146,7 +146,7 @@ def marquardt_method(
             a = x1
             x1 = x2
             f1 = f2
-            x2 = a + b - x2
+            x2 = 2 * x1
             f2 = func(x2)
             point_approach.append(x1)
 
